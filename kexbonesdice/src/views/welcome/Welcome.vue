@@ -1,11 +1,11 @@
 <template>
-  <div class="container">
+  <div class="welcomeContainer">
     <div class="title"><h1>逍 遥 骰</h1></div>
     <div class="words"><span>拂 去 尘 烟 , 一 念 逍 遥 。</span></div>
     <div class="menu">
       <div class="menuItem"><router-link to="/pvp">龙争虎斗</router-link></div>
-      <div class="menuItem"><router-link to="/pvp">投石拔距</router-link></div>
-      <div class="menuItem"><router-link to="/pvp">人外有人</router-link></div>
+      <div class="menuItem"><router-link to="/pve">投石拔距</router-link></div>
+      <div class="menuItem"><router-link to="/online">人外有人</router-link></div>
     </div>
   </div>
 </template>
@@ -15,7 +15,7 @@ export default {};
 </script>
 
 <style lang="less" scoped>
-.container {
+.welcomeContainer {
   height: 100%;
   display: flex;
   flex-direction: column;

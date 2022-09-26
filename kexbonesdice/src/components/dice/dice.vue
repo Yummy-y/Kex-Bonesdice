@@ -1,11 +1,11 @@
 <template>
-  <div class="container">
+  <div class="diceContainer">
     <div class="diceBox">
       <img :src="diceImg" class="dice" alt="" />
     </div>
     <div class="command">
       <input type="button" @click="shake()" value="摇一摇" />
-      <input type="button" @click="test" name="" id="" />
+      <!-- <input type="button" @click="test" name="" id="" /> -->
     </div>
   </div>
 </template>
@@ -15,7 +15,7 @@ export default {
   data() {
     return {
       onPlay: true,
-      diceImg: require("../../assets/diceImg/default.webp"),
+      diceImg: require("../../assets/diceImg/default.png"),
     };
   },
 
@@ -35,13 +35,13 @@ export default {
         setTimeout(function () {
           //this.diceImg = require('../../assets/diceImg/dice_3.gif');
           that.diceImg = require("../../assets/diceImg/" + str);
-          that.onPlay = true; //执行完毕后，再打开开关
           console.log(num);
-          //骰子动画结束后显示点数
+          //骰子动画结束后显示点数 打开开关
           setTimeout(function () {
             alert(num);
+            that.onPlay = true; //执行完毕后，再打开开关
           }, 1500);
-        }, this.methods.rand(500, 2000));
+        }, this.methods.rand(200, 2000));
       }
     },
   },
@@ -50,12 +50,12 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.container {
+.diceContainer {
   width: 100px;
   //height: 150px;
   display: flex;
   flex-direction: column;
-  background-color: rgb(247, 249, 251);
+  background-color: rgba(0,0,0,0);;
 }
 .diceBox {
   padding: 10px;

@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import Dice from '../../src/components/dice/dice.vue'
+import Dice from './dice/diceA.vue'
 export default {
   components: { Dice },
 };

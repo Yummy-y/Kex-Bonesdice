@@ -22,12 +22,13 @@ export default {
   methods: {
     test() {},
     shake() {
-      if (this.onPlay) {
+      if (this.$store.state.isBShake) {
         //判断开关的状态，若为true，执行下边的内容
-        this.onPlay = false; //开始执行后，关闭开关require("../../assetsdiceImg/spin.gif")
+        this.$store.commit("updataIsBShake", false); //开始执行后，关闭开关require("../../assetsdiceImg/spin.gif")
         this.diceImg = require("../../assets/diceImg/spin.gif"); //将静态图替换为动图
         //vue中require它是打包工具所需要的标识，你搞成运行时通过变量去定义的话，它就没办法打包了啊
         var num = this.methods.rand(1, 6);
+        this.$store.commit("updataRandB", num);
         var str = "dice_" + num + ".gif";
         // vue中在 setTimeout() 方法中如果用到 this ，必须在函数外定义一个变量来暂存 this
         const that = this;
@@ -38,10 +39,10 @@ export default {
           console.log(num);
           //骰子动画结束后显示点数 打开开关
           setTimeout(function () {
-            alert(num);
-            that.onPlay = true; //执行完毕后，再打开开关
+            //alert(num);
+            that.$store.commit("updataIsChangeBRow", true); //执行完毕后，再打开开关
           }, 1500);
-        }, this.methods.rand(200, 2000));
+        }, this.methods.rand(200, 1500));
       }
     },
   },
@@ -55,7 +56,7 @@ export default {
   //height: 150px;
   display: flex;
   flex-direction: column;
-  background-color: rgba(0,0,0,0);;
+  background-color: rgba(0, 0, 0, 0);
 }
 .diceBox {
   padding: 10px;

@@ -49,7 +49,7 @@ export default {
   created() {},
   methods: {
     test() {
-      console.log(typeof this.calculate(this.playerBData))
+      console.log(typeof this.calculate(this.playerBData));
       // this.calculate(this.playerBData);
     },
     //A九宫格 补充骰子和九宫格的禁用和满格判断（其实也算禁用
@@ -102,13 +102,21 @@ export default {
           console.log("remove the " + removed + "!");
         }
       }
-      //强行除bug 可能有更好的算法但是我暂时没想到
-      if (this.playerAData[row][0] == this.randb) {
-        var removedagain = this.playerAData[row].splice(0, 1);
-        //console.log("remove!",this.playerAData[row][i])
-        //this.$message("remove the " + removed + "!");
-        console.log("remove the " + removedagain + "!");
+      for (let i = 0; i < this.playerAData[row].length; i++) {
+        if (this.playerAData[row][i] == this.randb) {
+          var removed = this.playerAData[row].splice(i, 1);
+          //console.log("remove!",this.playerAData[row][i])
+          //this.$message("remove the " + removed + "!");
+          console.log("remove the " + removed + "!");
+        }
       }
+      //强行除bug 可能有更好的算法但是我暂时没想到
+      // if (this.playerAData[row][0] == this.randb) {
+      //   var removedagain = this.playerAData[row].splice(0, 1);
+      //   //console.log("remove!",this.playerAData[row][i])
+      //   //this.$message("remove the " + removed + "!");
+      //   console.log("remove the " + removedagain + "!");
+      // }
     },
     removeB() {
       var row = this.changeRow;
@@ -119,16 +127,23 @@ export default {
           console.log("remove the " + removed + "!");
         }
       }
-      //强行除bug 可能有更好的算法但是我暂时没想到
-      if (this.playerBData[row][0] == this.randa) {
-        var removedagain = this.playerBData[row].splice(0, 1);
-        //this.$message("remove the " + removedagain + "!");
-        console.log("remove the " + removedagain + "!");
+      for (let i = 0; i < this.playerBData[row].length; i++) {
+        if (this.playerBData[row][i] == this.randa) {
+          var removed = this.playerBData[row].splice(i, 1);
+          //this.$message("remove the " + removed + "!");
+          console.log("remove the " + removed + "!");
+        }
       }
+      //强行除bug 可能有更好的算法但是我暂时没想到
+      // if (this.playerBData[row][0] == this.randa) {
+      //   var removedagain = this.playerBData[row].splice(0, 1);
+      //   //this.$message("remove the " + removedagain + "!");
+      //   console.log("remove the " + removedagain + "!");
+      // }
     },
     //结算
     calculate(sudoku) {
-      var array=[0,0,0,0,0,0,0]
+      var array = [0, 0, 0, 0, 0, 0, 0];
       var sum = 0;
       //K
       for (let i = 0; i < sudoku["K"].length; i++) {
@@ -137,7 +152,7 @@ export default {
       for (let i = 1; i < array.length; i++) {
         sum += Math.pow(array[i], 2) * i;
       }
-      array=[0,0,0,0,0,0,0]
+      array = [0, 0, 0, 0, 0, 0, 0];
       //E
       for (let i = 0; i < sudoku["E"].length; i++) {
         array[sudoku["E"][i]]++;
@@ -145,7 +160,7 @@ export default {
       for (let i = 1; i < array.length; i++) {
         sum += Math.pow(array[i], 2) * i;
       }
-      array=[0,0,0,0,0,0,0]
+      array = [0, 0, 0, 0, 0, 0, 0];
       //X
       for (let i = 0; i < sudoku["X"].length; i++) {
         array[sudoku["X"][i]]++;
@@ -153,10 +168,10 @@ export default {
       for (let i = 1; i < array.length; i++) {
         sum += Math.pow(array[i], 2) * i;
       }
-      array=[0,0,0,0,0,0,0]
+      array = [0, 0, 0, 0, 0, 0, 0];
       //
       console.log(sum);
-      return sum
+      return sum;
     },
   },
   watch: {

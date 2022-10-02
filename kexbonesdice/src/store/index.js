@@ -11,6 +11,10 @@ export default new Vuex.Store({
     isBShake: false,
     isChangeARow: false,
     isChangeBRow: false,
+    //主页背景图
+    welcomeBgImg: require("../assets/img/welcomeBgImg_1.jpg"),
+    //游戏背景图
+    gameBgImg: require("../assets/img/welcomeBgImg_7.jpg"),
   },
   mutations: {
     //更新点数
@@ -36,6 +40,14 @@ export default new Vuex.Store({
     updataIsChangeBRow(state, flag) {
       state.isChangeBRow = flag
     },
+    //切换主页背景
+    changeWelcomeBgImg(state, str) {
+      state.welcomeBgImg = require("../assets/img/" + str);
+    },
+    //切换主页背景
+    changeGameBgImg(state, str) {
+      state.gameBgImg = require("../assets/img/" + str);
+    }
 
   },
   actions: {

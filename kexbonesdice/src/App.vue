@@ -6,7 +6,7 @@
 <script>
 export default {
   // 父向子组件传值 比较简单 子组件准备props就OK
-data() {
+  data() {
     return {};
   },
   created() {},
@@ -21,5 +21,4 @@ data() {
   text-align: center;
   color: #2c3e50;
 }
-
 </style>

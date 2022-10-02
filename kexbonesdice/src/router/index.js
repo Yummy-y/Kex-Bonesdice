@@ -4,6 +4,7 @@ import Index from '../components/Index.vue'
 import Welcome from '../views/welcome/Welcome.vue'
 import Pve from '../views/pve/Pve.vue'
 import Pvp from '../views/pvp/Pvp.vue'
+import test from '../views/test/Pvp.vue'
 
 Vue.use(VueRouter)
 
@@ -29,6 +30,10 @@ const routes = [
       {
         path: '/pvp',
         component: Pvp,
+      },
+      {
+        path: '/test',
+        component: test,
       },
     ]
   },

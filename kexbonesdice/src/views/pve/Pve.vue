@@ -1,5 +1,6 @@
 <template>
   <div>
+    <audio controls src="../../assets/music/击剑.mp3" ref="audio"></audio>
     <h1>pve页面暂时作为测试页面</h1>
     <div class="game">{{ playerAData }}</div>
     <div class="game">{{ playerBData }}</div>
@@ -22,6 +23,17 @@
       <el-button type="primary" @click="pushBX">push B X</el-button>
       <el-button type="primary" @click="test">test</el-button>
     </div>
+
+    <transition-group name="lyric">
+      <div class="tips" v-show="wordsShow" :key="1">
+        <div
+          class="wordsCon"
+          :style="{ backgroundImage: 'url(' + wordsImg + ')' }"
+        ></div>
+      </div>
+    </transition-group>
+
+    <el-button @click="showWords" class="btn">点击</el-button>
   </div>
 </template>
 
@@ -39,6 +51,23 @@ export default {
         E: [],
         X: [],
       },
+      //临时变量
+      arrayofArray: [
+        //K行
+        [1, 2, 3],
+        //E行
+        [1, 3, 4],
+        //X行
+        [6, 6, 6],
+      ],
+      testobject: {
+        A: { a: "zsy" },
+        B: { b: "ym" },
+        C: { c: "hiahia" },
+        U: [],
+      },
+      wordsImg: null,
+      wordsShow: false,
       randa: null,
       randb: null,
       isOver: false,
@@ -48,8 +77,41 @@ export default {
   },
   created() {},
   methods: {
+    pushShow(sudoku) {
+      let num = 0;
+      for (let i = sudoku.K.length; i > 0; i--) {
+        //let flag=false;
+        if (sudoku.K[sudoku.K.length - 1] == sudoku.K[i - 2]) {
+          num++;
+        }
+        //console.log("num=" + num);
+      }
+      if (num == 1) {
+        this.wordsImg = require("../../assets/wordsImg/来也.png");
+        this.showWords();
+        console.log("来也" + num);
+      } else if (num == 2) {
+        this.wordsImg = require("../../assets/wordsImg/无双.png");
+        this.showWords();
+        console.log("无双" + num);
+      }
+    },
+    playMusic() {
+      this.$refs.audio.currentTime = 0; //从头开始播放
+      this.$refs.audio.play(); //播放
+      setTimeout(() => {
+        this.$refs.audio.pause(); //停止
+      }, 80000);
+    },
+    showWords() {
+      this.wordsShow = true;
+      this.playMusic();
+      setTimeout(() => {
+        this.wordsShow = false; //停止
+      }, 650);
+    },
     test() {
-      console.log(typeof this.calculate(this.playerBData));
+      //console.log(typeof this.calculate(this.playerBData));
       // this.calculate(this.playerBData);
     },
     //A九宫格 补充骰子和九宫格的禁用和满格判断（其实也算禁用
@@ -59,6 +121,9 @@ export default {
     pushAK() {
       this.playerAData.K.push(this.randa);
       this.changeRow = "K";
+      // if (this.playerAData.K.toString() === [6, 6, 6].toString())
+      //   this.showWords();
+      this.pushShow(this.playerAData);
       this.removeB();
     },
     pushAE() {
@@ -93,12 +158,16 @@ export default {
     //消除
     removeA() {
       var row = this.changeRow;
+      var num = 0; //统计消除数量 播放动画
       //console.log('A ' + row + ' first is ' + this.playerAData[row][0])
       for (let i = 0; i < this.playerAData[row].length; i++) {
         if (this.playerAData[row][i] == this.randb) {
           var removed = this.playerAData[row].splice(i, 1);
           //console.log("remove!",this.playerAData[row][i])
           //this.$message("remove the " + removed + "!");
+          num++;
+          console.log("num++");
+
           console.log("remove the " + removed + "!");
         }
       }
@@ -108,6 +177,8 @@ export default {
           //console.log("remove!",this.playerAData[row][i])
           //this.$message("remove the " + removed + "!");
           console.log("remove the " + removed + "!");
+          num++;
+          console.log("num++");
         }
       }
       //强行除bug 可能有更好的算法但是我暂时没想到
@@ -117,6 +188,17 @@ export default {
       //   //this.$message("remove the " + removed + "!");
       //   console.log("remove the " + removedagain + "!");
       // }
+      if (num == 1) {
+        this.wordsImg = require("../../assets/wordsImg/接招.png");
+        this.showWords();
+      } else if (num == 2) {
+        this.wordsImg = require("../../assets/wordsImg/断.png");
+        this.showWords();
+      } else if (num == 3) {
+        this.wordsImg = require("../../assets/wordsImg/看破.png");
+        this.showWords();
+      }
+      num = 0;
     },
     removeB() {
       var row = this.changeRow;
@@ -229,5 +311,42 @@ export default {
 <style scoped lang="less">
 .game {
   font-size: 20px;
+}
+.xxx {
+  font-size: 45px;
+  font-family: 楷体;
+  font-weight: bold;
+  background-color: rgba(255, 255, 255, 0);
+}
+.lyric-enter,
+.lyric-leave-to {
+  opacity: 0;
+  //transform: translateY(30px);
+  transform: scale(3, 3);
+}
+.lyric-enter-to,
+.lyric-leave {
+  opacity: 1;
+}
+.lyric-enter-active,
+.lyric-leave-active {
+  transition: all 0.2s;
+}
+.tips {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .wordsCon {
+    height: 150px;
+    width: 320px;
+    // background-image: url("../../assets/wordsImg/无双.png");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+}
+.btn {
+  position: absolute;
+  top: 600px;
 }
 </style>

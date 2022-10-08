@@ -60,7 +60,7 @@
       width="50%"
       class="rulesDialog"
     >
-      <span>这是一段信息</span>
+      <span>你说的对，但是《逍遥骰》是由饿鬼队自主研发的一款基于vue框架和pyhton后端的全新策略随机骰子对战小游戏。游戏发生在一个被称作「逍遥境」的武侠幻想世界，在这里，被召选的人将被授予「明心之炁」，修炼真我之道。你将扮演一位名为「修行者」的侠客，在自由的修行中邂逅性格迥异、功法独特的侠士们，和他们一起云游四海，拂去尘烟，一念逍遥，至由太极而无极境界——同时，逐步发掘「逍遥道」的真相。</span>
       <span slot="footer" class="dialog-footer">
         <div class="rulesBoxBtn" @click="rulesDialogVisible = false">
           吾已知晓
@@ -110,6 +110,7 @@ export default {
     },
     playMusic() {
       this.musicFlag = !this.musicFlag;
+      this.$refs.audio.volume=0.6;
       if (this.musicFlag == true) this.$refs.audio.play();
       //播放
       else this.$refs.audio.pause();

@@ -4,8 +4,7 @@
       <img :src="diceImg" class="dice" alt="" />
     </div>
     <div class="command">
-      <input type="button" @click="shake()" value="摇一摇" />
-      <!-- <input type="button" @click="test" name="" id="" /> -->
+      <!-- <input type="button" @click="shake()" value="摇一摇" /> -->
     </div>
   </div>
 </template>
@@ -24,7 +23,7 @@ export default {
     shake() {
       if (this.$store.state.isAShake) {
         //判断开关的状态，若为true，执行下边的内容
-         this.$store.commit("updataIsAShake", false); //开始执行后，关闭开关require("../../assetsdiceImg/spin.gif")
+        this.$store.commit("updataIsAShake", false); //开始执行后，关闭开关require("../../assetsdiceImg/spin.gif")
         this.diceImg = require("../../assets/diceImg/spin.gif"); //将静态图替换为动图
         //vue中require它是打包工具所需要的标识，你搞成运行时通过变量去定义的话，它就没办法打包了啊
         var num = this.methods.rand(1, 6);
@@ -47,6 +46,11 @@ export default {
     },
   },
   computed: {},
+  watch: {
+    "$store.state.isAShake"() {
+      if (this.$store.state.isAShake == true) this.shake();
+    },
+  },
 };
 </script>
 
@@ -56,6 +60,7 @@ export default {
   //height: 150px;
   display: flex;
   flex-direction: column;
+  margin: 15px;
   background-color: rgba(0, 0, 0, 0);
 }
 .diceBox {

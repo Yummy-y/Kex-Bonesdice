@@ -7,7 +7,7 @@ export default new Vuex.Store({
   state: {
     randA: null,
     randB: null,
-    isAShake: true,
+    isAShake: false,
     isBShake: false,
     isChangeARow: false,
     isChangeBRow: false,

@@ -4,8 +4,7 @@
       <img :src="diceImg" class="dice" alt="" />
     </div>
     <div class="command">
-      <input type="button" @click="shake()" value="摇一摇" />
-      <!-- <input type="button" @click="test" name="" id="" /> -->
+      <!-- <input type="button" @click="shake()" value="摇一摇" /> -->
     </div>
   </div>
 </template>
@@ -47,6 +46,11 @@ export default {
     },
   },
   computed: {},
+  watch: {
+    "$store.state.isBShake"() {
+      if (this.$store.state.isBShake == true) this.shake();
+    },
+  },
 };
 </script>
 
@@ -56,6 +60,7 @@ export default {
   //height: 150px;
   display: flex;
   flex-direction: column;
+  margin: 15px;
   background-color: rgba(0, 0, 0, 0);
 }
 .diceBox {

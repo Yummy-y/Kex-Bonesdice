@@ -1,7 +1,7 @@
 <template>
   <div class="gameContainer">
     <el-button @click="test">test</el-button>
-    <el-button @click="tests">test</el-button>
+    <el-button @click="startGame">开始游戏</el-button>
     <div class="playerADice">
       <dice-a></dice-a>
     </div>
@@ -134,11 +134,10 @@ export default {
       console.log("randa : " + this.$store.state.randA);
       console.log("randb : " + this.$store.state.randB);
     },
-    tests() {
-      console.log(this.playerAData);
-      console.log(this.playerBData);
-      console.log(this.$store.state.isChangeARow);
-      //this.ToImg(this.playerAData,this.AImg)
+    startGame() {
+      console.log('开始游戏');
+      this.$store.commit("updataIsAShake", true);
+      
     },
     //点数转换为图片
     ToImg(playerData, imgData, changeRow) {

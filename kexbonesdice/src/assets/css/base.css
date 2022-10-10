@@ -110,8 +110,18 @@ html,body {
 }
 .el-dialog {
   border-radius: 14px;
+  height: 600px;
 }
-
+/* element滚动条组件 隐藏水平滚动条 */
+.el-scrollbar__wrap {
+  overflow-x: hidden;
+}
+.is-horizontal {
+  display: none !important;
+}
+.el-dialog__body {
+  padding: 0px 20px 30px;
+}
 
 
 

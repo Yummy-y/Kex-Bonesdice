@@ -14,7 +14,7 @@ export default {
   data() {
     return {
       onPlay: true,
-      diceImg: require("../../assets/diceImg/default.png"),
+      diceImg: require("../../assets/diceBImg/default.png"),
     };
   },
 
@@ -24,7 +24,7 @@ export default {
       if (this.$store.state.isBShake) {
         //判断开关的状态，若为true，执行下边的内容
         this.$store.commit("updataIsBShake", false); //开始执行后，关闭开关require("../../assetsdiceImg/spin.gif")
-        this.diceImg = require("../../assets/diceImg/spin.gif"); //将静态图替换为动图
+        this.diceImg = require("../../assets/diceBImg/spin.gif"); //将静态图替换为动图
         //vue中require它是打包工具所需要的标识，你搞成运行时通过变量去定义的话，它就没办法打包了啊
         var num = this.methods.rand(1, 6);
         this.$store.commit("updataRandB", num);
@@ -33,8 +33,8 @@ export default {
         const that = this;
         //随机时间后，将动态图替换为随机点数的图片
         setTimeout(function () {
-          //this.diceImg = require('../../assets/diceImg/dice_3.gif');
-          that.diceImg = require("../../assets/diceImg/" + str);
+          //this.diceImg = require('../../assets/diceBImg/dice_3.gif');
+          that.diceImg = require("../../assets/diceBImg/" + str);
           console.log(num);
           //骰子动画结束后显示点数 打开开关
           setTimeout(function () {

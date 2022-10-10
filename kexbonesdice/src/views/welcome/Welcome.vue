@@ -59,8 +59,21 @@
       :visible.sync="rulesDialogVisible"
       width="50%"
       class="rulesDialog"
+      overflow="scoll"
     >
-      <span>你说的对，但是《逍遥骰》是由饿鬼队自主研发的一款基于vue框架和pyhton后端的全新策略随机骰子对战小游戏。游戏发生在一个被称作「逍遥境」的武侠幻想世界，在这里，被召选的人将被授予「明心之炁」，修炼真我之道。你将扮演一位名为「修行者」的侠客，在自由的修行中邂逅性格迥异、功法独特的侠士们，和他们一起云游四海，拂去尘烟，一念逍遥，至由太极而无极境界——同时，逐步发掘「逍遥道」的真相。</span>
+      <el-scrollbar is-vertical style="height: 470px">
+        <h1 style="margin:10px">游戏简介</h1>
+        <span
+          >你说的对，但是《逍遥骰》是由饿鬼队自主研发的一款基于vue框架和pyhton后端的全新策略随机骰子对战小游戏。游戏发生在一个被称作「逍遥境」的武侠幻想世界，在这里，被召选的人将被授予「明心之炁」，修炼真我之道。你将扮演一位名为「修行者」的侠客，在自由的修行中邂逅性格迥异、功法独特的侠士们，和他们一起云游四海，拂去尘烟，一念逍遥，至由太极而无极境界——同时，逐步发掘「逍遥道」的真相。</span
+        >
+        <h1 style="margin:10px">游戏规则</h1>
+        <div class="rulesImg">
+          <img src="../../assets/rulesImg/base.png" alt="" />
+          <img src="../../assets/rulesImg/shake.png" alt="" />
+          <img src="../../assets/rulesImg/remove.png" alt="" />
+          <img src="../../assets/rulesImg/calculate.png" alt="" />
+        </div>
+      </el-scrollbar>
       <span slot="footer" class="dialog-footer">
         <div class="rulesBoxBtn" @click="rulesDialogVisible = false">
           吾已知晓
@@ -110,7 +123,7 @@ export default {
     },
     playMusic() {
       this.musicFlag = !this.musicFlag;
-      this.$refs.audio.volume=0.6;
+      this.$refs.audio.volume = 0.6;
       if (this.musicFlag == true) this.$refs.audio.play();
       //播放
       else this.$refs.audio.pause();
@@ -205,6 +218,13 @@ export default {
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+    .rulesImg {
+      padding: 10px;
+      img {
+        display: inline-block;
+        width: 100%;
+      }
+    }
   }
   .rulesBoxBtn {
     height: 40px;

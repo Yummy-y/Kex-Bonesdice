@@ -578,74 +578,74 @@ export default {
     scoreak: function () {
       var array = [0, 0, 0, 0, 0, 0, 0];
       //scoreAK
-      this.score.scoreAK=0;
+      this.score.scoreAK = 0;
       for (let i = 0; i < this.playerAData[0].length; i++) {
         array[this.playerAData[0][i]]++;
       }
       for (let i = 1; i < array.length; i++) {
         this.score.scoreAK += Math.pow(array[i], 2) * i;
       }
-      return this.methods.intToChinese(this.score.scoreAK)
+      return this.methods.intToChinese(this.score.scoreAK);
     },
     scoreae: function () {
       var array = [0, 0, 0, 0, 0, 0, 0];
       //scoreAK
-      this.score.scoreAE=0;
+      this.score.scoreAE = 0;
       for (let i = 0; i < this.playerAData[1].length; i++) {
         array[this.playerAData[1][i]]++;
       }
       for (let i = 1; i < array.length; i++) {
         this.score.scoreAE += Math.pow(array[i], 2) * i;
       }
-      return this.methods.intToChinese(this.score.scoreAE)
+      return this.methods.intToChinese(this.score.scoreAE);
     },
     scoreax: function () {
       var array = [0, 0, 0, 0, 0, 0, 0];
       //scoreAK
-      this.score.scoreAX=0;
+      this.score.scoreAX = 0;
       for (let i = 0; i < this.playerAData[2].length; i++) {
         array[this.playerAData[2][i]]++;
       }
       for (let i = 1; i < array.length; i++) {
         this.score.scoreAX += Math.pow(array[i], 2) * i;
       }
-      return this.methods.intToChinese(this.score.scoreAX)
+      return this.methods.intToChinese(this.score.scoreAX);
     },
     scorebk: function () {
       var array = [0, 0, 0, 0, 0, 0, 0];
       //scoreAK
-      this.score.scoreBK=0;
+      this.score.scoreBK = 0;
       for (let i = 0; i < this.playerBData[0].length; i++) {
         array[this.playerBData[0][i]]++;
       }
       for (let i = 1; i < array.length; i++) {
         this.score.scoreBK += Math.pow(array[i], 2) * i;
       }
-      return this.methods.intToChinese(this.score.scoreBK)
+      return this.methods.intToChinese(this.score.scoreBK);
     },
     scorebe: function () {
       var array = [0, 0, 0, 0, 0, 0, 0];
       //scoreAK
-      this.score.scoreBE=0;
+      this.score.scoreBE = 0;
       for (let i = 0; i < this.playerBData[1].length; i++) {
         array[this.playerBData[1][i]]++;
       }
       for (let i = 1; i < array.length; i++) {
         this.score.scoreBE += Math.pow(array[i], 2) * i;
       }
-      return this.methods.intToChinese(this.score.scoreBE)
+      return this.methods.intToChinese(this.score.scoreBE);
     },
     scorebx: function () {
       var array = [0, 0, 0, 0, 0, 0, 0];
       //scoreBX
-      this.score.scoreBX=0;
+      this.score.scoreBX = 0;
       for (let i = 0; i < this.playerBData[2].length; i++) {
         array[this.playerBData[2][i]]++;
       }
       for (let i = 1; i < array.length; i++) {
         this.score.scoreBX += Math.pow(array[i], 2) * i;
       }
-      return this.methods.intToChinese(this.score.scoreBX)
+      return this.methods.intToChinese(this.score.scoreBX);
     },
   },
 
@@ -669,10 +669,17 @@ export default {
           let scoreA = this.calculate(this.playerAData);
           let scoreB = this.calculate(this.playerBData);
           if (scoreA > scoreB)
-            this.$message.success("A:" + scoreA + "B:" + scoreB + " A win !");
+            this.$message.success(
+              "A: " + scoreA + " " + " B: " + scoreB + " A 获胜 !"
+            );
           else if (scoreA < scoreB)
-            this.$message.success("A:" + scoreA + "B:" + scoreB + " B win !");
-          else this.$message.success("A:" + scoreA + "B:" + scoreB + " 平局！");
+            this.$message.success(
+              "A: " + scoreA + " " + " B: " + scoreB + " B 获胜 !"
+            );
+          else
+            this.$message.success(
+              "A: " + scoreA + " " + " B: " + scoreB + " 平局！"
+            );
           //游戏结束 功能禁用
           this.$store.commit("updataIsAShake", false);
           this.$store.commit("updataIsBShake", false);

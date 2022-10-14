@@ -317,7 +317,7 @@ export default {
     },
     //test
     test() {
-      console.log(this.AIRow);
+      console.log(this.randb);
       this.getBChangeRow().then((ret) => {
         console.log(ret);
       });
@@ -456,8 +456,8 @@ export default {
     //Brow
     pushBK() {
       if (this.$store.state.isChangeBRow && this.playerBData[0].length < 3) {
-        this.$store.commit("updataIsAShake", true);
         this.randb = this.$store.state.randB;
+        this.$store.commit("updataIsAShake", true);
         this.playerBData[0].push(this.randb);
         this.changeRow = "K";
         this.ToImg(this.playerBData, this.BImg, this.changeRow);
@@ -468,8 +468,8 @@ export default {
     },
     pushBE() {
       if (this.$store.state.isChangeBRow && this.playerBData[1].length < 3) {
-        this.$store.commit("updataIsAShake", true);
         this.randb = this.$store.state.randB;
+        this.$store.commit("updataIsAShake", true);
         this.playerBData[1].push(this.randb);
         this.changeRow = "E";
         this.ToImg(this.playerBData, this.BImg, this.changeRow);
@@ -480,8 +480,8 @@ export default {
     },
     pushBX() {
       if (this.$store.state.isChangeBRow && this.playerBData[2].length < 3) {
-        this.$store.commit("updataIsAShake", true);
         this.randb = this.$store.state.randB;
+        this.$store.commit("updataIsAShake", true);
         this.playerBData[2].push(this.randb);
         this.changeRow = "X";
         this.ToImg(this.playerBData, this.BImg, this.changeRow);
@@ -575,25 +575,16 @@ export default {
       console.log(sum);
       return sum;
     },
-    //api
+    //api  尝试在pushb时候调用接口
     async getBChangeRow() {
-      const { data: res } = await this.$axios({
-        method: "post",
-        url: "/hhh",
-        data: {
-          dataA: this.playerBData,
-          dataB: this.playerAData,
-          point: this.randb,
-        },
-        header: {
-          "Content-Type": "application/json", //如果写成contentType会报错
-        },
+      let result = await this.$axios.post("/pve", {
+        dataA: this.playerBData,
+        dataB: this.playerAData,
+        point: this.$store.state.randB,
       });
-      // if (res.meta.status !== 200) return this.$message.error(res.meta.msg);
-      //console.log(res);
-      //console.log(typeof res.next_step);
-      this.AIRow = res.next_step;
-      return res.next_step;
+      console.log(result);
+      this.AIRow = result.data;
+      return result.data;
     },
   },
   mounted() {},
@@ -693,10 +684,17 @@ export default {
           let scoreA = this.calculate(this.playerAData);
           let scoreB = this.calculate(this.playerBData);
           if (scoreA > scoreB)
-            this.$message.success("A:" + scoreA + "B:" + scoreB + " A win !");
+            this.$message.success(
+              "A: " + scoreA + " " + " B: " + scoreB + " A 获胜 !"
+            );
           else if (scoreA < scoreB)
-            this.$message.success("A:" + scoreA + "B:" + scoreB + " B win !");
-          else this.$message.success("A:" + scoreA + "B:" + scoreB + " 平局！");
+            this.$message.success(
+              "A: " + scoreA + " " + " B: " + scoreB + " B 获胜 !"
+            );
+          else
+            this.$message.success(
+              "A: " + scoreA + " " + " B: " + scoreB + " 平局！"
+            );
           //游戏结束 功能禁用
           this.$store.commit("updataIsAShake", false);
           this.$store.commit("updataIsBShake", false);
@@ -723,10 +721,17 @@ export default {
           let scoreA = this.calculate(this.playerAData);
           let scoreB = this.calculate(this.playerBData);
           if (scoreA > scoreB)
-            this.$message.success("A:" + scoreA + "B:" + scoreB + " A win !");
+            this.$message.success(
+              "A: " + scoreA + " " + " B: " + scoreB + " A 获胜 !"
+            );
           else if (scoreA < scoreB)
-            this.$message.success("A:" + scoreA + "B:" + scoreB + " B win !");
-          else this.$message.success("A:" + scoreA + "B:" + scoreB + " 平局！");
+            this.$message.success(
+              "A: " + scoreA + " " + " B: " + scoreB + " B 获胜 !"
+            );
+          else
+            this.$message.success(
+              "A: " + scoreA + " " + " B: " + scoreB + " 平局！"
+            );
           //游戏结束 功能禁用
           this.$store.commit("updataIsAShake", false);
           this.$store.commit("updataIsBShake", false);
@@ -767,18 +772,20 @@ export default {
         }
       }, 12);
       if (this.$store.state.isChangeBRow == true) {
-        if (typeof this.getBChangeRow() == Number) this.getBChangeRow();
-        else this.pushBK();
-
+        //console.log("bbb"+this.randb)
+        this.getBChangeRow();
         setTimeout(() => {
-          if (this.AIRow == 1) {
+          if (this.AIRow == "1") {
             this.pushBK();
+            console.log("airow" + this.AIRow);
             console.log("pushk");
-          } else if (this.AIRow == 2) {
+          } else if (this.AIRow == "2") {
             this.pushBE();
+            console.log("airow" + this.AIRow);
             console.log("pushe");
-          } else if (this.AIRow == 3) {
+          } else if (this.AIRow == "3") {
             this.pushBX();
+            console.log("airow" + this.AIRow);
             console.log("pushx");
           } else console.log("row is " + this.AIRow);
         }, 1000);

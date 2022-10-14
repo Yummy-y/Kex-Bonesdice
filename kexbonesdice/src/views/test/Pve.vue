@@ -36,8 +36,10 @@
     <el-button @click="showWords" class="btn">点击</el-button>
 
     <!-- 呼吸效果 -->
-    <div class="root" :style="{ opacity ,height:brht+'px',width:brht+'px'}">
-    </div>
+    <div
+      class="root"
+      :style="{ opacity, height: brht + 'px', width: brht + 'px' }"
+    ></div>
   </div>
 </template>
 
@@ -79,17 +81,30 @@ export default {
       changeRow: "",
       //呼吸灯
       opacity: 1,
-      brht: 120
+      brht: 120,
     };
   },
   created() {},
   methods: {
+    // 请求轮播图数据
+    async getBannerData() {
+      let result = await this.$axios.get("/banner");
+      console.log(result);
+      this.bannerData = result.data.banners;
+    },
+    //测试请求
+    async try() {
+      let result = await this.$axios.post("http://127.0.0.1:5000/try",{A:"very",B:"nice"});
+      console.log(result);
+    },
     //呼吸灯
     change() {
       setInterval(() => {
         this.opacity -= 0.01; //透明度减0.01
-        this.brht +=0.05;
-        if (this.opacity <= 0.1 ) {this.opacity = 1,this.brht = 120}; //当透明度为0就重新设为1
+        this.brht += 0.05;
+        if (this.opacity <= 0.1) {
+          (this.opacity = 1), (this.brht = 120);
+        } //当透明度为0就重新设为1
       }, 10);
     },
     pushShow(sudoku) {
@@ -128,6 +143,7 @@ export default {
     test() {
       //console.log(typeof this.calculate(this.playerBData));
       // this.calculate(this.playerBData);
+      this.try();
     },
     //A九宫格 补充骰子和九宫格的禁用和满格判断（其实也算禁用
     randA() {
@@ -370,7 +386,6 @@ export default {
 .root {
   //background-color: rgb(35, 190, 221);
   border-radius: 50%;
-  border:3px solid yellow;
-
+  border: 3px solid yellow;
 }
 </style>

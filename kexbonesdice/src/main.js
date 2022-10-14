@@ -8,11 +8,10 @@ import './plugins/element.js'
 import "./assets/css/base.css"
 //公用方法
 import methods from './utils/methods'
-Vue.prototype.methods=methods;
+Vue.prototype.methods = methods;
 
 //导入 axios 使我们可以发起axios请求
 import axios from 'axios'
-//axios.defaults.headers['Content-Type']= 'application/json'
 Vue.prototype.$axios = axios
 axios.withCredentials = true
 // 配置请求的跟路径 由后端提供 这样我们只要输入根路径后面的地址就OK （例如/login /home
